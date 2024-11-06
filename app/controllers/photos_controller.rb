@@ -9,6 +9,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1 or /photos/1.json
   def show
+    authorize @photo
   end
 
   # GET /photos/new
@@ -78,4 +79,10 @@ class PhotosController < ApplicationController
         redirect_back fallback_location: root_url, alert: "You're not authorized for that."
       end
     end
+
+    # def ensure_user_is_authorized
+    #   if !PhotoPolicy.new(current_user, @photo).show?
+    #     raise Pundit::NotAuthorizedError, "not allowed"
+    #   end
+    # end
 end
